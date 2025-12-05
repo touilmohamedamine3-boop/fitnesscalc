@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Free fitness calculator that instantly generates BMI, BMR, TDEE, macros and calorie targets based on your personal questionnaire. Get a personalized meal and workout plan in seconds." />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- Open Graph (Facebook & LinkedIn) -->
+  <meta property="og:title" content="Fitness Calculator – BMI, BMR, TDEE & Macros" />
+  <meta property="og:description" content="Answer a quick questionnaire and get your full fitness breakdown: BMI, BMR, TDEE, calories, macros and training plan." />
+  <meta property="og:image" content="https://yourdomain.com/preview.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ultimate Fitness Calculator" />
+  <meta name="twitter:description" content="Instant personalized fitness calculations: BMI, BMR, TDEE and macros." />
+  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Fitness Calculator",
+    "url": "https://yourdomain.com/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "description": "Online fitness calculator that generates BMI, BMR, TDEE and macronutrient targets using a questionnaire.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Bootstrap UI Library (stable CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fitness Questionnaire & Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
+
+    :root{
+      --bg-1: #07070a;
+      --bg-2: #0b0b0f;
+      --accent: #ff2b2b;
+      --accent-dark: #8b0000;
+      --muted: #cfcfcf;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, var(--bg-1), var(--bg-2));
+      color: var(--muted);
+      padding: 0;
+      margin: 0;
+    }
+    nav.navbar {
+      background: rgba(10,10,12,0.95) !important;
+      border-bottom: 1px solid rgba(255,43,43,0.12);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.6);
+    }
+    .navbar-brand img { height: 40px; margin-right: 12px; vertical-align: middle; }
+    .navbar-brand span { color: var(--accent); font-weight: bold; }
+    .nav-link { color: #e8e8e8 !important; }
+    .hero{
+      background: linear-gradient(180deg, rgba(255,43,43,0.03), transparent 60%);
+      padding: 48px 0;
+      text-align: center;
+      color: #fff;
+    }
+    .hero h1{ color: #fff; text-shadow: 0 0 10px rgba(255,43,43,0.08); }
+
+    .container-main{
+      max-width: 980px;
+      margin: -40px auto 48px;
+      padding: 22px;
+      background: rgba(6,6,8,0.85);
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,43,43,0.06);
+    }
+
+    label{ font-weight:600; color:#f5f5f5 }
+    input, select { background:#071017; color:#fff; border:1px solid rgba(255,43,43,0.08); }
+    .btn-primary{ background: linear-gradient(90deg,var(--accent),var(--accent-dark)); border:none; }
+    .ad-box{ height:auto; min-height:120px; border:2px dashed rgba(255,43,43,0.12); display:flex; align-items:center; justify-content:center; color:rgba(255,43,43,0.9); background:linear-gradient(90deg, rgba(255,43,43,0.02), transparent); padding:10px; }
+
+    .results{ background: linear-gradient(180deg, rgba(255,43,43,0.02), rgba(0,0,0,0.2)); padding:18px; border-radius:10px; color:#fff; border:1px solid rgba(255,43,43,0.06); }
+
+    footer{ text-align:center; color:var(--muted); margin-top:24px }
+
+    @media (max-width: 768px){ .container-main{ margin: -20px 12px 24px } }
+  </style>
+</head>
+<body>
+  <!-- Professional Navigation Bar with Logo -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">
+        <img src="https://img.freepik.com/free-vector/fitness-logo-template_23-2148859278.jpg?w=2000" alt="Logo" />
+        <span>FITCALC PRO</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#questionnaire">Questionnaire</a></li>
+          <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container px-4">
+      <h1 class="display-6">Fitness Questionnaire — Instant Calculators</h1>
+      <p class="lead">Answer a few simple questions and get a detailed nutrition & training plan.</p>
+      <!-- Banner Ad Beneath Hero Title -->
+      <div class="ad-box mt-4">
+        <img src="https://i.ibb.co/xKYV37Dq/fictif-ad.jpg" alt="Banner Ad" style="width:auto; height:auto; object-fit:contain;" />
+      </div>
+    </div>
+  </section>
+
+  <main class="container-main" id="questionnaire">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h3 class="mb-3">Your Profile</h3>
+        <label class="form-label">Gender</label>
+        <select class="form-select mb-2" id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <label class="form-label">Age</label>
+        <input class="form-control mb-2" type="number" id="age" placeholder="Age in years" min="10" />
+
+        <label class="form-label">Height (cm)</label>
+        <input class="form-control mb-2" type="number" id="height" placeholder="Height in cm" min="80" />
+
+        <label class="form-label">Weight (kg)</label>
+        <input class="form-control mb-2" type="number" id="weight" placeholder="Weight in kg" min="20" />
+
+        <label class="form-label">Activity Level</label>
+        <select class="form-select mb-2" id="activity">
+          <option value="1.2">Sedentary — little or no exercise</option>
+          <option value="1.375">Light — 1–3 days/week</option>
+          <option value="1.55">Moderate — 3–5 days/week</option>
+          <option value="1.725">Very active — 6–7 days/week</option>
+          <option value="1.9">Extra active — intense daily</option>
+        </select>
+
+        <label class="form-label">Goal</label>
+        <select class="form-select mb-3" id="goal">
+          <option value="loss">Weight Loss</option>
+          <option value="maintain">Maintenance</option>
+          <option value="gain">Muscle Gain</option>
+        </select>
+
+        <button class="btn btn-primary btn-lg w-100" onclick="calculateAll()">SHOW RESULTS</button>
+
+        <div class="ad-box mt-4">Google AdSense Placement</div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="results" id="results">
+          <p class="text-muted mb-0">No results yet — complete the questionnaire and press <strong>SHOW RESULTS</strong>.</p>
+        </div>
+
+        <div class="ad-box mt-4">Google AdSense Placement</div>
+      </div>
+    </div>
+
+    <footer class="mt-4">
+      <small>Built with standard formulas: BMI, Mifflin‑St Jeor BMR, TDEE activity multipliers. Ad slots are placeholders for AdSense.</small>
+    </footer>
+  </main>
+
+  <script>
+    function calculateAll(){
+      const age = Number(document.getElementById('age').value);
+      const height = Number(document.getElementById('height').value);
+      const weight = Number(document.getElementById('weight').value);
+      const gender = document.getElementById('gender').value;
+      const activity = Number(document.getElementById('activity').value);
+      const goal = document.getElementById('goal').value;
+
+      if(!age || !height || !weight){ alert('Please fill age, height and weight.'); return; }
+
+      const hM = height / 100;
+      const bmi = weight / (hM * hM);
+      let bmr = 10 * weight + 6.25 * height - 5 * age + (gender === 'male' ? 5 : -161);
+      const tdee = Math.round(bmr * activity);
+      let finalCalories = goal === 'loss' ? Math.round(tdee - 400) : goal === 'gain' ? Math.round(tdee + 300) : tdee;
+      const proteinG = Math.round(weight * 1.6), proteinCals = proteinG * 4;
+      const fatCals = Math.round(finalCalories * 0.25), fatG = Math.round(fatCals / 9);
+      const carbsCals = finalCalories - (proteinCals + fatCals), carbsG = Math.max(0, Math.round(carbsCals / 4));
+      let bmiCategory = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal weight' : bmi < 30 ? 'Overweight' : 'Obesity';
+
+      const html = `
+        <h4 class="mb-2">Detailed Results</h4>
+        <h6>📌 Body Mass Index (BMI)</h6>
+        <p>Your BMI: <strong>${bmi.toFixed(1)}</strong> — ${bmiCategory}</p>
+        <h6>🔥 Basal Metabolic Rate (BMR)</h6>
+        <p>BMR (Mifflin‑St Jeor): <strong>${Math.round(bmr)} kcal/day</strong> — calories burned at rest.</p>
+        <h6>⚡ Total Daily Energy Expenditure (TDEE)</h6>
+        <p>TDEE using activity factor <strong>${activity}</strong>: <strong>${tdee} kcal/day</strong>.</p>
+        <h6>🥅 Goal-Based Calorie Target</h6>
+        <p>Goal: <strong>${goal}</strong> — Recommended daily calories: <strong>${finalCalories} kcal</strong>.</p>
+        <ul>
+          <li><strong>Weight Loss:</strong> moderate deficit (~400 kcal).</li>
+          <li><strong>Maintenance:</strong> calories = TDEE.</li>
+          <li><strong>Muscle Gain:</strong> modest surplus (~300 kcal).</li>
+        </ul>
+        <h6>🍽️ Macronutrient Breakdown</h6>
+        <p>Protein: <strong>${proteinG} g</strong> (${proteinCals} kcal) • Fats: <strong>${fatG} g</strong> (${fatCals} kcal) • Carbs: <strong>${carbsG} g</strong> (${carbsCals} kcal)</p>
+        <h6>📊 Daily Meal Structure Recommendation</h6>
+        <ul>
+          <li><strong>Breakfast:</strong> protein + slow carbs.</li>
+          <li><strong>Lunch:</strong> balanced (protein + carbs + veg).</li>
+          <li><strong>Dinner:</strong> lean protein + veg, lower carbs if cutting.</li>
+          <li><strong>Snacks:</strong> protein-rich (eggs, tuna, yogurt, nuts).</li>
+        </ul>
+        <h6>🏋️ Training Strategy</h6>
+        <ul>
+          <li><strong>Strength:</strong> 3–4 sessions/week, progressive overload.</li>
+          <li><strong>Cardio:</strong> 2–3 sessions/week (20–30 min) for conditioning.</li>
+          <li><strong>Recovery:</strong> 7–8 hours sleep, hydrate, track progress.</li>
+        </ul>
+        <h6>💡 Quick Summary</h6>
+        <p>To maintain: <strong>${tdee} kcal</strong>. Based on your goal, target: <strong>${finalCalories} kcal/day</strong> with macros: <strong>${proteinG}g</strong> protein • <strong>${fatG}g</strong> fat • <strong>${carbsG}g</strong> carbs.</p>
+      `;
+      document.getElementById('results').innerHTML = html;
+      document.getElementById('results').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
